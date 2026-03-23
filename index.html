@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Palette Studio</title>
+
+    <link rel="stylesheet" href="css/index.css">
+    <script defer src="js/index.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;1,500&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+</head>
+<body>
+ <header class="header">
+    <div class="header__content">
+        <a class="header__logo" href="#">Palette Studio</a>
+        <button class="btn" id="exportBtn">Export</button>
+    </div>
+ </header>
+ <main>
+    <!-- App Title ----------------------------------------------------------------------------------------  -->
+    <section class="section hero">
+        <h2>Palette Vizualer</h2>
+        <p>Preview your colors on real designs for a better visual understanding. More templates to come!</p>
+
+    <!-- App ---------------------------------------------------------------------------------------- -->
+    <section class="section">
+        <div class="app">
+            <!-- App header ------------------------------ -->
+            <div class="app__header head">
+                <div class="head__item head__active">
+                    <button class="head__btn" id="logotype">Logotype</button>
+                </div>
+
+                <div class="head__item">
+                    <button class="head__btn" id="webpage">Web Page</button>
+                </div>
+
+                <div class="head__item head__right">
+                    <button class="head__btn" id="Components">Components</button>
+                </div>
+            </div>
+            <!-- App Interface ------------------------------ -->
+            <div class="app__interface interface">
+
+            </div>
+            <!-- App Footer ------------------------------ -->
+            <div class="app__footer foot">
+                <div class="foot__color-picker">
+                    <input type="color" id="colorInput" value="#ff0000">
+                    <div class="color-info">
+                        <p>HEX: <span id="hexValue">#ff0000</span></p>
+                        <p>RGB: <span id="rgbValue">rgb(255, 0, 0)</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ </main>
+ <footer>
+
+ </footer>
+</body>
+</html>

@@ -1,0 +1,283 @@
+/* Theme variables ------------------------------------------------------------------------------------------ */
+:root {
+  --color-black: #1d1d1d;
+  --color-black-opacity: #2e2e2e;
+  --color-white: #f5f1f1;
+  --color-white-opacity: #e4e1e1;
+  --color-border: #9f9c9c;
+  --color-main: #2a2eff;
+  --color-main-light: #6097fd;
+
+  --font-main: "Manrope", sans-serif;
+  --font-label: "DM Mono", monospace;
+  --max-width: 60rem;
+  --max-width-xl: 90rem;
+
+  --paddign-section: clamp(1.5rem, 4vw, 3rem) 0.625rem;
+  --border-radius: 1.5rem;
+
+  --transition-fast: 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+  --transition-medium: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-slow: 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* CSS Reset ------------------------------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+li {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: none;
+}
+
+
+.section {
+  margin: 0 auto;
+  max-width: var(--max-width-xl);
+  padding: var(--paddign-section);
+}
+
+/* Styles ------------------------------------------------------------------------------------------ */
+
+.label {
+  font: 400 normal clamp(1.125rem, 3vw, 1.25rem) var(--font-label);
+  color: var(--color-black);
+
+  &--italic {
+    font: 500 italic clamp(1.125rem, 3vw, 1.25rem) var(--font-main);
+    color: var(--color-black);
+  }
+}
+
+h1,
+.h1 {
+  font: 800 clamp(4rem, 10vw, 8rem) var(--font-main);
+  color: var(--color-black);
+}
+
+h2,
+.h2 {
+  font: 800 clamp(2.5rem, 6vw, 5rem) var(--font-main);
+  color: var(--color-black);
+}
+
+h3,
+.h3 {
+  font: 600 clamp(2rem, 5vw, 4rem) var(--font-main);
+  color: var(--color-black);
+}
+
+h4,
+.h4 {
+  font: 600 clamp(1.125rem, 3vw, 2rem) var(--font-main);
+  color: var(--color-black);
+}
+
+p,
+.body,
+input,
+select,
+label,
+li {
+  font: 400 clamp(1.125rem, 3vw, 1.25rem) var(--font-main);
+  color: var(--color-black);
+}
+
+a,
+button {
+  font: 500 clamp(1.125rem, 3vw, 1.25rem) var(--font-main);
+  color: var(--color-black);
+  cursor: pointer;
+}
+
+.link {
+  font: 500 italic clamp(1.125rem, 3vw, 1.25rem) var(--font-main);
+  color: var(--color-main-light);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--color-main);
+}
+
+/* Components ------------------------------------------------------------------------------------------ */
+/* Form Components */
+
+input,
+select {
+  padding: 1rem 1.125rem;
+  border-radius: 20px;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid var(--color-border);
+}
+
+input[type="text"]:focus,
+select:focus {
+  border: 1px solid var(--color-main);
+}
+
+input[type="checkbox"] {
+  height: 1rem;
+  width: auto;
+}
+
+
+
+// buttons
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .625rem 1.125rem;
+  gap: .625rem;
+  border-radius: var(--border-radius);
+  background-color: var(--color-main);
+  color: var(--color-white);
+  transition: var(--transition-fast);
+
+  &:hover {
+    background-color: var(--color-main-light);
+  }
+
+  &--white {
+    background-color: var(--color-white);
+    color: var(--color-black);
+
+    &:hover {
+      background-color: var(--color-white-opacity);
+    }
+  }
+
+  &--black {
+    background-color: var(--color-black);
+    color: var(--color-white);
+
+    &:hover {
+      background-color: var(--color-black-opacity);
+    }
+  }
+}
+
+
+
+// Header ------------------------------------------------------------------------------------------
+
+.header {
+  background-color: var(--color-white);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+
+  &__content {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0 auto;
+    max-width: var(--max-width-xl);
+    justify-content: space-between;
+  }
+
+  &__logo {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    font-weight: 700;
+  }
+}
+
+
+// Footer ------------------------------------------------------------------------------------------
+
+
+
+
+/* App ------------------------------------------------------------------------------------------ */
+
+.app {
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+
+  &__header {
+    background-color: var(--color-white);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+  }
+
+  &__interface {
+    height: 70vh;
+  }
+
+  &__footer {
+    background-color: var(--color-white);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: start;
+    padding: 1rem;
+  }
+} 
+
+
+.head {
+  overflow: hidden;
+  &__item {
+    background-color: var(--color-white);
+    padding: 0.625rem 1.125rem;
+    border: 2px solid var(--color-border);
+    transition: var(--transition-medium);
+
+    &:hover {
+      padding: 0.625rem 1.5rem;
+    }
+  }
+  
+  &__active {
+    background-color: var(--color-white-opacity);
+  }
+
+  &__right {
+    border-radius: 0 1.5rem 0 0;
+  }
+}
+
+.foot {
+  
+  &__color-picker {
+
+  }
+}

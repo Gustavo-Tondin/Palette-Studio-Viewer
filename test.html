@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,
+	initial-scale=1.0">
+	<title>Color Palette Generator</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		.container {
+			margin: 20px;
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		.container .color {
+			margin: 12px;
+			padding: 7px;
+			list-style: none;
+			cursor: pointer;
+			text-align: center;
+			background: #fff;
+			border-radius: 16px;
+			box-shadow: 0 0px 30px 0px rgb(207, 206, 206);
+			transition: all 0.3s ease;
+		}
+
+		h1 {
+			text-align: center;
+			padding: 10px;
+			color: green;
+		}
+
+		.container .color:active {
+			transform: scale(0.95);
+		}
+
+		.color .rect-box {
+			width: 185px;
+			height: 188px;
+			border-radius: 10px;
+		}
+
+		.color:hover .rect-box {
+			filter: brightness(107%);
+		}
+
+		.color .hex-value {
+			display: block;
+			color: #444;
+			user-select: none;
+			font-weight: 500;
+			font-size: 1.15rem;
+			margin: 12px 0 8px;
+			text-transform: uppercase;
+		}
+
+		.refresh-btn {
+			position: fixed;
+			left: 50%;
+			bottom: 40px;
+			color: #fff;
+			cursor: pointer;
+			outline: none;
+			font-weight: 500;
+			font-size: 1.1rem;
+			border-radius: 5px;
+			background: green;
+			padding: 13px 20px;
+			border: none;
+			transform: translateX(-50%);
+			box-shadow: 0 0px 30px 0px grey;
+			transition: all 0.3s ease;
+		}
+
+		.refresh-btn:hover {
+			background: rgb(4, 95, 4);
+		}
+
+		.copied-message {
+			margin: 10px;
+			color: crimson;
+			font-weight: bold;
+			font-family: 'Courier New',
+				Courier, monospace;
+		}
+
+		.search-container {
+			position: relative;
+			margin: 20px auto;
+			width: 300px;
+		}
+
+		.search-input {
+			width: 100%;
+			padding: 15px;
+			border: 2px solid #ccc;
+			border-radius: 15px;
+			font-size: 16px;
+			outline: none;
+			transition: border-color 0.3s;
+			box-shadow: 0 0px 10px 0px #b3b2b2;
+		}
+
+		.search-input:hover {
+			border-color: #007bff;
+		}
+
+		@media screen and (max-width: 500px) {
+			.container {
+				margin: 10px;
+			}
+
+			.container .color {
+				margin: 8px;
+				padding: 5px;
+				width: calc(100% / 2 - 20px);
+			}
+
+			.color .rect-box {
+				width: 100%;
+				height: 148px;
+			}
+
+			.color .hex-value {
+				font-size: 1.05rem;
+			}
+
+			.refresh-btn {
+				font-size: 1rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Color Palette Generator</h1>
+
+	<div class="search-container">
+		<input type="text" class="search-input"
+			placeholder="Search for a color"
+			id="searchInput">
+	</div>
+
+	<ul id="colorList" class="container"></ul>
+
+	<button class="refresh-btn" id="refreshBtn">
+		Refresh Palette
+	</button>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const colorList = document.getElementById('colorList');
+			const searchInput = document.getElementById('searchInput');
+			const refreshBtn = document.getElementById('refreshBtn');
+
+			// Initial color palette generation
+			generateColorPalette();
+
+			// Generate color palette function
+			function generateColorPalette() {
+				const maxColorBoxes = 21;
+				const colorListArray = [];
+
+				for (let i = 0; i < maxColorBoxes; i++) {
+					const randomHexColor = '#' +
+						Math.floor(Math.random()
+						* 0xffffff).toString(16).padStart(6, '0');
+					colorListArray.push(randomHexColor);
+				}
+
+				renderColorList(colorListArray);
+			}
+
+			// Render color list
+			function renderColorList(colorListArray) {
+				colorList.innerHTML = ''; // Clear previous list
+
+				colorListArray.forEach((hexValue, index) => {
+					const listItem = document.createElement('li');
+					listItem.classList.add('color');
+					listItem.innerHTML = `
+						<div class="rect-box" style="background:
+						${hexValue}"></div>
+						<span class="hex-value">${hexValue}</span>
+					`;
+					listItem.addEventListener('click', () =>
+						copyColorToClipboard(hexValue, index));
+					colorList.appendChild(listItem);
+				});
+			}
+
+			// Copy color to clipboard
+			function copyColorToClipboard(hexValue, index) {
+				navigator.clipboard.writeText(hexValue)
+					.then(() => {
+						alert('Copied');
+					})
+					.catch(() => {
+						alert('Failed to copy the color code!');
+					});
+			}
+
+			// Search input event listener
+			searchInput.addEventListener('input', () => {
+				const searchValue = searchInput.value.toLowerCase();
+
+				const colorMapping = {
+					red: ["#FF0000", "#FF5733",
+						"#c21919", "#FF6347", "#FF4500"],
+					green: ["#00FF00", "#33FF73", "#C3FF00",
+						"#228B22", "#008000"],
+					blue: ["#0000FF", "#3373FF", "#00C3FF",
+						"#1E90FF", "#4169E1"],
+					// Add more color mappings as needed
+				};
+
+				const matchingColors = colorMapping[searchValue] || [];
+
+				if (matchingColors.length > 0) {
+					renderColorList(matchingColors);
+				} else {
+					generateColorPalette();
+				}
+			});
+
+			// Refresh button event listener
+			refreshBtn.addEventListener('click',
+					generateColorPalette);
+		});
+	</script>
+</body>
+
+</html>
