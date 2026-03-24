@@ -12,50 +12,112 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;1,500&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 </head>
 <body>
  <header class="header">
     <div class="header__content">
         <a class="header__logo" href="#">Palette Studio</a>
-        <button class="btn" id="exportBtn">Export</button>
+        <div class="header__actions">
+            <button class="btn" id="randomBtn">Randomize</button>
+            <button class="btn btn--black" id="exportBtn">Export CSS</button>
+        </div>
     </div>
  </header>
  <main>
-    <!-- App Title ----------------------------------------------------------------------------------------  -->
-    <section class="section hero">
-        <h2>Palette Vizualer</h2>
-        <p>Preview your colors on real designs for a better visual understanding. More templates to come!</p>
-
     <!-- App ---------------------------------------------------------------------------------------- -->
-    <section class="section">
-        <div class="app">
-            <!-- App header ------------------------------ -->
-            <div class="app__header head">
-                <div class="head__item head__active">
-                    <button class="head__btn" id="logotype">Logotype</button>
-                </div>
-
-                <div class="head__item">
-                    <button class="head__btn" id="webpage">Web Page</button>
-                </div>
-
-                <div class="head__item head__right">
-                    <button class="head__btn" id="Components">Components</button>
-                </div>
-            </div>
-            <!-- App Interface ------------------------------ -->
-            <div class="app__interface interface">
-
-            </div>
-            <!-- App Footer ------------------------------ -->
-            <div class="app__footer foot">
-                <div class="foot__color-picker">
-                    <input type="color" id="colorInput" value="#ff0000">
-                    <div class="color-info">
-                        <p>HEX: <span id="hexValue">#ff0000</span></p>
-                        <p>RGB: <span id="rgbValue">rgb(255, 0, 0)</span></p>
+    <section class="app">
+        <aside class="sidebar">
+            <div class="sidebar__section">
+                <p class="label">Your Palette</p>
+                <div class="palette-strip">
+                    <div class="palette-strip__swatch" style="background:var(--pal-primary)">
+                    </div>
+                    <div class="palette-strip__swatch" data-slot="1" style="background:var(--pal-secondary)">
+                    </div>
+                    <div class="palette-strip__swatch" data-slot="2" style="background:var(--pal-accent)">
+                    </div>
+                    <div class="palette-strip__swatch" data-slot="3" style="background:var(--pal-light)">
+                    </div>
+                    <div class="palette-strip__swatch" data-slot="4" style="background:var(--pal-dark)">
                     </div>
                 </div>
+            </div>
+        
+            <div class="sidebar__section color">
+                <p class="label">Edit Colors</p>
+                <div class="color__slot">
+                    <input type="color" value="#ff0000">
+                    <div class="color-info">
+                        <p class="color__name">Primary</p>
+                        <p class="hex-value">#ff0000</p>
+                    </div>
+                </div>
+                <div class="color__slot">
+                    <input type="color" value="#ff0000">
+                    <div class="color__info">
+                        <p class="color__name">Secondary</p>
+                        <p class="hex-value">#ff0000</p>
+                    </div>
+                </div>
+                <div class="color__slot">
+                    <input type="color" value="#ff0000">
+                    <div class="color__info">
+                        <p class="color__name">Accent</p>
+                        <p class="hex-value">#ff0000</p>
+                    </div>
+                </div>
+                <div class="color__slot">
+                    <input type="color" value="#ff0000">
+                    <div class="color__info">
+                        <p class="color__name">Light</p>
+                        <p class="hex__value">#ff0000</p>
+                    </div>
+                </div>
+                <div class="color__slot">
+                    <input type="color" value="#ff0000">
+                    <div class="color__info">
+                        <p class="color__name">Dark</p>
+                        <p class="hex-value">#ff0000</p>
+                    </div>
+                </div>
+            </div>
+        
+        </aside>
+        
+        <div class="canvas">
+            <nav class="topbar">
+                <div class="topbar__item  active">
+                    <button class="topbar__text">Logotype</button>
+                </div>
+                <div class="topbar__item">
+                    <button class="topbar__text">Website</button>
+                </div>
+                <div class="topbar__item">
+                    <button class="topbar__text">Components</button>
+                </div>
+            </nav>
+
+            <div class="preview">
+                <!-- Logotipo -->
+                <div class="preview__window logotipo active" id="preview-logo">
+                    <form class="file" action="post" enctype="multipart/form-data">
+                        <label for="logo" class="file__style"><i class="ri-file-upload-line"></i>Add your own logo</label>
+                        <input style="display: none;" type="file" id="logo" name="logo" accept="image/svg"/>
+                    </form>
+                    <div class="logotipo__grid"></div>
+                </div>
+            
+                <!-- Website -->
+                <div class="preview__window" id="preview-website">
+                    <div class="site-preview" id="sitePreview"></div>
+                </div>
+            
+                <!-- Components-->
+                <div class="preview__window" id="preview-components">
+                    <div class="comp-grid" id="compPreview"></div>
+                </div>  
             </div>
         </div>
     </section>
