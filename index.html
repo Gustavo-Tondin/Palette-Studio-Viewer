@@ -15,7 +15,11 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
 </head>
+
+
 <body>
+
+<!-- Header ---------------------------------------------------------------------------------------- -->
  <header class="header">
     <div class="header__content">
         <a class="header__logo" href="#">Palette Studio</a>
@@ -25,68 +29,77 @@
         </div>
     </div>
  </header>
+
+ 
  <main>
     <!-- App ---------------------------------------------------------------------------------------- -->
     <section class="app">
+
+        
+        <!-- Sidebar ---------------------------------------------------------------------------------------- -->
         <aside class="sidebar">
             <div class="sidebar__section">
                 <p class="label">Your Palette</p>
                 <div class="palette-strip">
                     <div class="palette-strip__swatch" style="background:var(--pal-primary)">
                     </div>
-                    <div class="palette-strip__swatch" data-slot="1" style="background:var(--pal-secondary)">
+                    <div class="palette-strip__swatch" style="background:var(--pal-secondary)">
                     </div>
-                    <div class="palette-strip__swatch" data-slot="2" style="background:var(--pal-accent)">
+                    <div class="palette-strip__swatch" style="background:var(--pal-accent)">
                     </div>
-                    <div class="palette-strip__swatch" data-slot="3" style="background:var(--pal-light)">
+                    <div class="palette-strip__swatch" style="background:var(--pal-light)">
                     </div>
-                    <div class="palette-strip__swatch" data-slot="4" style="background:var(--pal-dark)">
+                    <div class="palette-strip__swatch" style="background:var(--pal-dark)">
                     </div>
                 </div>
             </div>
-        
+
             <div class="sidebar__section color">
                 <p class="label">Edit Colors</p>
                 <div class="color__slot">
-                    <input type="color" value="#ff0000">
-                    <div class="color-info">
+                    <input type="color" value="#2a2eff">
+                    <div class="color__info">
                         <p class="color__name">Primary</p>
-                        <p class="hex-value">#ff0000</p>
+                        <p class="color__value">#2a2eff</p>
                     </div>
                 </div>
                 <div class="color__slot">
-                    <input type="color" value="#ff0000">
+                    <input type="color" value="#6097fd">
                     <div class="color__info">
                         <p class="color__name">Secondary</p>
-                        <p class="hex-value">#ff0000</p>
+                        <p class="color__value">#6097fd</p>
                     </div>
                 </div>
                 <div class="color__slot">
-                    <input type="color" value="#ff0000">
+                    <input type="color" value="#ff5252">
                     <div class="color__info">
                         <p class="color__name">Accent</p>
-                        <p class="hex-value">#ff0000</p>
+                        <p class="color__value">#ff5252</p>
                     </div>
                 </div>
                 <div class="color__slot">
-                    <input type="color" value="#ff0000">
+                    <input type="color" value="#f5f1f1">
                     <div class="color__info">
                         <p class="color__name">Light</p>
-                        <p class="hex__value">#ff0000</p>
+                        <p class="color__value">#f5f1f1</p>
                     </div>
                 </div>
                 <div class="color__slot">
-                    <input type="color" value="#ff0000">
+                    <input type="color" value="#070303">
                     <div class="color__info">
                         <p class="color__name">Dark</p>
-                        <p class="hex-value">#ff0000</p>
+                        <p class="color__value">#070303</p>
                     </div>
                 </div>
             </div>
-        
         </aside>
-        
+
+
+    <!-- canvas ---------------------------------------------------------------------------------------- -->
         <div class="canvas">
+
+
+        <!-- Topbar ---------------------------------------------------------------------------------------- -->
             <nav class="topbar">
                 <div class="topbar__item  active">
                     <button class="topbar__text">Logotype</button>
@@ -99,32 +112,75 @@
                 </div>
             </nav>
 
-            <div class="preview">
-                <!-- Logotipo -->
-                <div class="preview__window logotipo active" id="preview-logo">
-                    <form class="file" action="post" enctype="multipart/form-data">
-                        <label for="logo" class="file__style"><i class="ri-file-upload-line"></i>Add your own logo</label>
-                        <input style="display: none;" type="file" id="logo" name="logo" accept="image/svg"/>
-                    </form>
-                    <div class="logotipo__grid"></div>
+
+        <!-- Preview ---------------------------------------------------------------------------------------- -->
+            <!-- Logotipo --------------------- -->
+            <div class="preview__window logotipo active">
+                <form id="file" class="file" action="post" enctype="multipart/form-data">
+                    <label for="logo" class="file__style">
+                        <i class="ri-file-upload-line"></i>Add your own logo
+                    </label>
+                    <input style="display: none;" type="file" id="logo" name="logo" accept="image/svg" />
+                </form>
+                <div class="logotipo__grid">
                 </div>
-            
-                <!-- Website -->
-                <div class="preview__window" id="preview-website">
-                    <div class="site-preview" id="sitePreview"></div>
-                </div>
-            
-                <!-- Components-->
-                <div class="preview__window" id="preview-components">
-                    <div class="comp-grid" id="compPreview"></div>
-                </div>  
             </div>
-        </div>
+            
+            <!-- Website --------------------- -->
+            <div class="preview__window">
+                <div class="website">
+                    <div class="website__hero">
+                        <h2 class="website__heading">Your Brand, Here.</h2>
+                        <p class="website__subtext">A preview of how your color palette behaves on a webpage.</p>
+                        <div class="website__actions">
+                            <span class="website__cta website__cta--primary">Primary button</span>
+                            <span class="website__cta website__cta--outline">Secundary</span>
+                        </div>
+                    </div>
+                    <div class="website__cards">
+                        <div class="website__card website__card--secondary">Card Secondary</div>
+                        <div class="website__card website__card--light">Card Light</div>
+                        <div class="website__card website__card--dark">Card Dark</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Components --------------------- -->
+            <div class="preview__window components">
+                <div class="components__grid">
+                        <div class="components__block">
+                            <p class="label">Buttons</p>
+                            <div class="components__row">
+                                <span class="components__btn components__btn--primary">Primary</span>
+                                <span class="components__btn components__btn--accent">Accent</span>
+                                <span class="components__btn components__btn--dark">Dark</span>
+                            </div>
+                        </div>
+ 
+                        <div class="components__block">
+                            <p class="label">Typography</p>
+                            <p class="components__type components__type--heading">Heading</p>
+                            <p class="components__type components__type--body">Body text normal</p>
+                            <p class="components__type components__type--accent">Accent color text</p>
+                        </div>
+ 
+                        <div class="components__block">
+                            <p class="label">Badge / Tag</p>
+                            <div class="components__row">
+                                <span class="components__badge components__badge--primary">Primary</span>
+                                <span class="components__badge components__badge--accent">Accent</span>
+                                <span class="components__badge components__badge--secondary">Secondary</span>
+                            </div>
+                        </div>
+ 
+                        <div class="components__block">
+                            <p class="label components__label">Input</p>
+                            <input class="components__input" type="text" placeholder="Type something...">
+                        </div>
+                </div>
+            </div>
     </section>
 
  </main>
- <footer>
-
- </footer>
 </body>
 </html>
