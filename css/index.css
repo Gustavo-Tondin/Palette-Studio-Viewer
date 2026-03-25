@@ -60,6 +60,7 @@ input:focus,
 textarea:focus,
 select:focus,
 button:focus {
+  border: none;
   outline: none;
 }
 
@@ -132,26 +133,6 @@ button {
 }
 
 /* Components ------------------------------------------------------------------------------------------ */
-/* Form Components */
-input,
-select {
-  padding: 1rem 1.125rem;
-  border-radius: 20px;
-  background-color: var(--color-white);
-  color: var(--color-black);
-  border: 1px solid var(--color-border);
-}
-
-input[type=text]:focus,
-select:focus {
-  border: 1px solid var(--color-primary);
-}
-
-input[type=checkbox] {
-  height: 1rem;
-  width: auto;
-}
-
 .btn {
   display: flex;
   justify-content: center;
@@ -186,9 +167,10 @@ input[type=checkbox] {
   background-color: var(--color-white);
   position: sticky;
   top: 0;
-  width: 100%;
+  width: 100vw;
+  height: 60px;
   padding: 0.5rem 1rem;
-  box-shadow: 0 0 5px var(--color-black);
+  box-shadow: 0 0 5px var(--color-border);
   z-index: 1;
 }
 .header__content {
@@ -205,6 +187,11 @@ input[type=checkbox] {
   flex-flow: row nowrap;
   gap: 1rem;
 }
+@media (max-width: 464px) {
+  .header {
+    height: 80px;
+  }
+}
 
 /* App ------------------------------------------------------------------------------------------ */
 body {
@@ -217,12 +204,17 @@ body {
   gap: 0;
   align-items: start;
 }
+@media (max-width: 768px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* Side-Bar ------------------------------------------------------------------------------------------ */
 .sidebar {
   background: var(--color-white);
   border-right: 1px solid var(--color-border);
-  height: 100vh;
+  height: calc(100vh - 60px);
   position: sticky;
   left: 0;
   padding: 1.5rem 1rem;
@@ -234,6 +226,14 @@ body {
   display: flex;
   flex-flow: column nowrap;
   gap: 0.25rem;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
 }
 
 .palette-strip {
@@ -320,6 +320,10 @@ body {
 .topbar__item:hover .topbar__text {
   color: var(--color-primary-light);
   transform: translateY(-2px);
+}
+.topbar__item:active, .topbar__item :focus {
+  outline: none;
+  border: none;
 }
 .topbar__text {
   background: none;
@@ -480,6 +484,9 @@ body {
   background: var(--pal-dark);
   color: var(--pal-light);
 }
+.components__btn:hover {
+  opacity: 0.8;
+}
 .components__type {
   font-family: var(--font-main);
   line-height: 1.4;
@@ -529,6 +536,6 @@ body {
   color: var(--color-black);
 }
 .components__input:focus {
-  border-color: var(--pal-accent);
+  border: 2px solid var(--pal-accent);
   outline: none;
 }/*# sourceMappingURL=index.css.map */
