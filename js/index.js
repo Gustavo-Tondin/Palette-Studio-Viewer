@@ -26,6 +26,7 @@ const colorValue = document.querySelectorAll(".color__value");
 
 colorInputs.forEach((input, i) => {
     const setColor = () => {
+        input.value = localStorage.getItem(input.dataset.color);
         root.style.setProperty(input.dataset.color, input.value);
         colorValue[i].textContent = localStorage.getItem(input.dataset.color);
         localStorage.setItem(input.dataset.color, input.value);
@@ -33,9 +34,10 @@ colorInputs.forEach((input, i) => {
     input.addEventListener("input", setColor);
 
     if (localStorage.getItem(input.dataset.color)) {
-        input.value = localStorage.getItem(input.dataset.color);
         setColor();
     }
 });
 
 // logo upload -------------------------------------------------------------
+
+
