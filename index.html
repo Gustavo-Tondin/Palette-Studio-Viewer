@@ -1,186 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Palette Studio - Visualize, edite e exporte paletas de cores para seus projetos web.">
     <title>Palette Studio</title>
-
-    <link rel="stylesheet" href="css/index.css">
-    <script defer src="js/index.js"></script>
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;1,500&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    
+    <link rel="stylesheet" href="css/index.css">
+    <script defer src="js/index.js"></script>
 </head>
 
-
 <body>
-
-<!-- Header ---------------------------------------------------------------------------------------- -->
- <header class="header">
-    <div class="header__content">
-        <a class="header__logo" href="#">Palette Studio</a>
-        <div class="header__actions">
-            <button class="btn" id="randomBtn"><i class="ri-restart-line"></i><span>Randomize</span></button>
-            <button class="btn btn--black" id="exportBtn"><i class="ri-export-line"></i><span>Export CSS</span></button>
+    <header class="header">
+        <div class="header__content">
+            <h1 class="header__logo" title="Palette Studio">
+                <a href="#" title="Ir para o início" class="header__logo-link">
+                    <span class="logo-full">Palette Studio</span>
+                    <span class="logo-short">PS</span>
+                </a>
+            </h1>
+            <nav class="header__actions" aria-label="Ações principais">
+                <button class="btn" id="randomBtn" title="Gerar cores aleatórias">
+                    <i class="ri-restart-line"></i><span class="btn__text">Randomize</span>
+                </button>
+                <button class="btn btn--black" id="exportBtn" title="Exportar variáveis CSS">
+                    <i class="ri-export-line"></i><span class="btn__text">Export CSS</span>
+                </button>
+                <button class="btn btn-icon btn--primary" id="toggleSidebarBtn" title="Alternar menu lateral">
+                    <i class="ri-menu-line"></i>
+                </button>
+            </nav>
         </div>
-    </div>
- </header>
+    </header>
 
- 
- <main>
-    <!-- App ---------------------------------------------------------------------------------------- -->
-    <section class="app">
-
-        
-        <!-- Sidebar ---------------------------------------------------------------------------------------- -->
-        <aside class="sidebar">
+    <main class="app">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar__section">
-                <p class="label">Your Palette</p>
-                <div class="palette-strip">
-                    <div class="palette-strip__swatch" style="background:var(--pal-primary)">
-                    </div>
-                    <div class="palette-strip__swatch" style="background:var(--pal-secondary)">
-                    </div>
-                    <div class="palette-strip__swatch" style="background:var(--pal-accent)">
-                    </div>
-                    <div class="palette-strip__swatch" style="background:var(--pal-light)">
-                    </div>
-                    <div class="palette-strip__swatch" style="background:var(--pal-dark)">
-                    </div>
+                <div class="sidebar__header">
+                    <p class="label">Your Palette</p>
+                    <button class="btn-icon" id="resetBtn" title="Resetar cores originais">
+                        <i class="ri-refresh-line"></i>
+                    </button>
+                </div>
+                <div class="palette-strip" id="paletteStripBtn" tabindex="0" title="Escolher paleta pronta">
+                    <div class="palette-strip__swatch" style="background:var(--pal-primary)"></div>
+                    <div class="palette-strip__swatch" style="background:var(--pal-secondary)"></div>
+                    <div class="palette-strip__swatch" style="background:var(--pal-accent)"></div>
+                    <div class="palette-strip__swatch" style="background:var(--pal-light)"></div>
+                    <div class="palette-strip__swatch" style="background:var(--pal-dark)"></div>
+                    <div class="palette-strip__overlay"><span>Choose preset</span></div>
                 </div>
             </div>
 
             <div class="sidebar__section color">
                 <p class="label">Edit Colors</p>
-                <div class="color__slot">
-                    <input type="color" value="#2a2eff" data-color="--pal-primary">
-                    <div class="color__info">
-                        <p class="color__name">Primary</p>
-                        <p class="color__value">#2a2eff</p>
-                    </div>
-                </div>
-                <div class="color__slot">
-                    <input type="color" value="#6097fd" data-color="--pal-secondary">
-                    <div class="color__info">
-                        <p class="color__name">Secondary</p>
-                        <p class="color__value">#6097fd</p>
-                    </div>
-                </div>
-                <div class="color__slot">
-                    <input type="color" value="#ff5252" data-color="--pal-accent">
-                    <div class="color__info">
-                        <p class="color__name">Accent</p>
-                        <p class="color__value">#ff5252</p>
-                    </div>
-                </div>
-                <div class="color__slot">
-                    <input type="color" value="#f5f1f1" data-color="--pal-light">
-                    <div class="color__info">
-                        <p class="color__name">Light</p>
-                        <p class="color__value">#f5f1f1</p>
-                    </div>
-                </div>
-                <div class="color__slot">
-                    <input type="color" value="#070303" data-color="--pal-dark">
-                    <div class="color__info">
-                        <p class="color__name">Dark</p>
-                        <p class="color__value">#070303</p>
-                    </div>
-                </div>
+                <ul class="color__list">
+                    <li class="color__slot">
+                        <label for="color-primary" class="visually-hidden">Cor Primária</label>
+                        <input type="color" id="color-primary" value="#2a2eff" data-color="--pal-primary">
+                        <div class="color__info">
+                            <p class="color__name">Primary</p>
+                            <p class="color__value">#2a2eff</p>
+                        </div>
+                    </li>
+                    <li class="color__slot">
+                        <label for="color-secondary" class="visually-hidden">Cor Secundária</label>
+                        <input type="color" id="color-secondary" value="#6097fd" data-color="--pal-secondary">
+                        <div class="color__info">
+                            <p class="color__name">Secondary</p>
+                            <p class="color__value">#6097fd</p>
+                        </div>
+                    </li>
+                    <li class="color__slot">
+                        <label for="color-accent" class="visually-hidden">Cor Destaque</label>
+                        <input type="color" id="color-accent" value="#ff5252" data-color="--pal-accent">
+                        <div class="color__info">
+                            <p class="color__name">Accent</p>
+                            <p class="color__value">#ff5252</p>
+                        </div>
+                    </li>
+                    <li class="color__slot">
+                        <label for="color-light" class="visually-hidden">Cor Clara</label>
+                        <input type="color" id="color-light" value="#f5f1f1" data-color="--pal-light">
+                        <div class="color__info">
+                            <p class="color__name">Light</p>
+                            <p class="color__value">#f5f1f1</p>
+                        </div>
+                    </li>
+                    <li class="color__slot">
+                        <label for="color-dark" class="visually-hidden">Cor Escura</label>
+                        <input type="color" id="color-dark" value="#070303" data-color="--pal-dark">
+                        <div class="color__info">
+                            <p class="color__name">Dark</p>
+                            <p class="color__value">#070303</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </aside>
 
-
-    <!-- canvas ---------------------------------------------------------------------------------------- -->
         <div class="canvas">
-
-
-        <!-- Topbar ---------------------------------------------------------------------------------------- -->
-            <nav class="topbar">
-                <div class="topbar__item  active">
-                    <button class="topbar__text">Logotype</button>
-                </div>
-                <div class="topbar__item">
-                    <button class="topbar__text">Website</button>
-                </div>
-                <div class="topbar__item">
-                    <button class="topbar__text">Components</button>
-                </div>
+            <nav class="topbar" aria-label="Navegação de visualização">
+                <ul class="topbar__list" id="tabContainer">
+                    <li class="topbar__item active" data-target="logotipo">
+                        <button class="topbar__text" title="Ver logotipo">Logotype</button>
+                    </li>
+                    <li class="topbar__item" data-target="website">
+                        <button class="topbar__text" title="Ver website">Website</button>
+                    </li>
+                    <li class="topbar__item" data-target="components">
+                        <button class="topbar__text" title="Ver componentes">Components</button>
+                    </li>
+                    <div class="topbar__indicator" id="topbarIndicator"></div>
+                </ul>
             </nav>
 
-
-        <!-- Preview ---------------------------------------------------------------------------------------- -->
-            <!-- Logotipo --------------------- -->
-            <div class="preview__window logotipo active">
-                <form id="file" class="file" action="post" enctype="multipart/form-data">
-                    <label for="logo" class="file__style">
+            <div class="preview__window active" id="logotipo">
+                <form id="fileForm" class="file" action="#" method="POST" enctype="multipart/form-data">
+                    <label for="logo" class="file__style" title="Fazer upload de logotipo SVG ou PNG">
                         <i class="ri-file-upload-line"></i>Add your own logo
                     </label>
-                    <input style="display: none;" type="file" id="logo" name="logo" accept="image/svg" />
+                    <input class="visually-hidden" type="file" id="logo" name="logo" accept="image/*">
                 </form>
-                <div class="logotipo__grid">
-                </div>
+                <div class="logotipo__grid" id="logoGrid"></div>
             </div>
             
-            <!-- Website --------------------- -->
-            <div class="preview__window">
-                <div class="website">
-                    <div class="website__hero">
-                        <h2 class="website__heading">Your Brand, Here.</h2>
-                        <p class="website__subtext">A preview of how your color palette behaves on a webpage.</p>
-                        <div class="website__actions">
-                            <span class="website__cta website__cta--primary">Primary button</span>
-                            <span class="website__cta website__cta--outline">Secundary</span>
+            <div class="preview__window" id="website">
+                <div class="browser-mock">
+                    <div class="browser-mock__header">
+                        <div class="browser-mock__dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="browser-mock__url">yourbrand.com</div>
+                    </div>
+                    <div class="website">
+                        <header class="website__header">
+                            <div class="website__logo-placeholder">Your Brand</div>
+                            <nav class="website__nav">
+                                <span>Home</span><span>About</span><span>Contact</span>
+                            </nav>
+                        </header>
+                        <div class="website__hero">
+                            <h2 class="website__heading">Your Brand, Here.</h2>
+                            <p class="website__subtext">A preview of how your color palette behaves on a webpage.</p>
+                            <div class="website__actions">
+                                <button class="website__cta website__cta--primary" title="Botão primário">Primary button</button>
+                                <button class="website__cta website__cta--outline" title="Botão secundário">Secondary</button>
+                            </div>
+                        </div>
+                        <div class="website__cards">
+                            <div class="website__card website__card--secondary"><i class="ri-magic-line"></i><h3>Creative</h3></div>
+                            <div class="website__card website__card--light"><i class="ri-focus-2-line"></i><h3>Focused</h3></div>
+                            <div class="website__card website__card--dark"><i class="ri-rocket-line"></i><h3>Dynamic</h3></div>
                         </div>
                     </div>
-                    <div class="website__cards">
-                        <div class="website__card website__card--secondary">Card Secondary</div>
-                        <div class="website__card website__card--light">Card Light</div>
-                        <div class="website__card website__card--dark">Card Dark</div>
-                    </div>
                 </div>
             </div>
             
-            <!-- Components --------------------- -->
-            <div class="preview__window components">
+            <div class="preview__window components" id="components">
                 <div class="components__grid">
-                        <div class="components__block">
-                            <p class="label">Buttons</p>
-                            <div class="components__row">
-                                <span class="components__btn components__btn--primary">Primary</span>
-                                <span class="components__btn components__btn--accent">Accent</span>
-                                <span class="components__btn components__btn--dark">Dark</span>
-                            </div>
-                        </div>
- 
-                        <div class="components__block">
-                            <p class="label">Typography</p>
-                            <p class="components__type components__type--heading">Heading</p>
-                            <p class="components__type components__type--body">Body text normal</p>
-                            <p class="components__type components__type--accent">Accent color text</p>
-                        </div>
- 
-                        <div class="components__block">
-                            <p class="label">Badge / Tag</p>
-                            <div class="components__row">
-                                <span class="components__badge components__badge--primary">Primary</span>
-                                <span class="components__badge components__badge--accent">Accent</span>
-                                <span class="components__badge components__badge--secondary">Secondary</span>
-                            </div>
-                        </div>
- 
-                        <div class="components__block">
-                            <p class="label components__label">Input</p>
-                            <input class="components__input" type="text" placeholder="Type something...">
-                        </div>
+                    <div class="components__block">
+                        <p class="label">Buttons (MD3 Style)</p>
+                        <ul class="components__row">
+                            <li><button class="md3-btn md3-btn--filled" title="Filled">Filled</button></li>
+                            <li><button class="md3-btn md3-btn--tonal" title="Tonal">Tonal</button></li>
+                            <li><button class="md3-btn md3-btn--outlined" title="Outlined">Outlined</button></li>
+                        </ul>
+                    </div>
+                    <div class="components__block">
+                        <p class="label">Typography</p>
+                        <ul class="components__list">
+                            <li class="components__type components__type--heading">Display Heading</li>
+                            <li class="components__type components__type--body">Regular body text used for descriptions.</li>
+                            <li class="components__type components__type--accent">Highlighted accent text.</li>
+                        </ul>
+                    </div>
+                    <div class="components__block">
+                        <p class="label">Chips / Tags</p>
+                        <ul class="components__row">
+                            <li><span class="components__badge components__badge--primary">Primary</span></li>
+                            <li><span class="components__badge components__badge--accent">Accent</span></li>
+                            <li><span class="components__badge components__badge--secondary">Secondary</span></li>
+                        </ul>
+                    </div>
+                    <div class="components__block">
+                        <p class="label components__label">Text Field</p>
+                        <label for="demo-input" class="visually-hidden">Demonstração de input</label>
+                        <input id="demo-input" class="md3-input" type="text" placeholder="Type something...">
+                    </div>
                 </div>
             </div>
-    </section>
+        </div>
+    </main>
 
- </main>
+    <dialog class="modal" id="palettesModal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 class="heading-3">Preset Palettes</h3>
+                <button class="btn-icon" id="closePalettesBtn" title="Fechar modal"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="presets-grid" id="presetsGrid">
+                </div>
+        </div>
+    </dialog>
+
+    <dialog class="modal" id="exportModal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 class="heading-3">Your CSS Variables</h3>
+                <button class="btn-icon" id="closeModalBtn" title="Fechar modal"><i class="ri-close-line"></i></button>
+            </div>
+            <pre><code id="cssCodeBlock"></code></pre>
+            <div class="modal__actions">
+                <button class="btn" id="copyCodeBtn" title="Copiar código"><i class="ri-clipboard-line"></i> Copiar</button>
+            </div>
+        </div>
+    </dialog>
 </body>
 </html>
